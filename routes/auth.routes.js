@@ -1,13 +1,12 @@
 import express from 'express';
-import authController from '../controllers/auth.controller.js';
-import authMiddleware from '../middleware/auth.middleware.js'
+import { login, register} from '../controllers/auth.controller.js';
+import { validateRegister, validateLogin, handleValidation } from '../middleware/auth.middleware.js'
 
 const router = express.Router();
 
-router.get('/allUsers',authController.allUsersPage);
+router.post('/register', validateRegister, handleValidation, register);
 
-router.post('/register', authMiddleware.validateRegister, authController.register);
+router.post('/login', validateLogin, handleValidation, login)
 
-router.post('/login', authMiddleware.validateLogin, authController.login)
 
 export default router;
