@@ -27,13 +27,14 @@ function getUserByEmail(userEmail){
 
 function registerUser(full_name, email, password){
     return new Promise((resolve, reject)=>{
-        db.run("INSERT INTO users (full_name, email, password) VALUES(?,?,?)" , [full_name, email, password],(err)=>{
-            if(err){
-                reject(err);
-            }else{
-                resolve(this.lastID);
-            }
-        });
+        db.run("INSERT INTO users (full_name, email, password) VALUES(?,?,?)" , [full_name, email, password],
+            function (err){
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(this.lastID);
+                }
+            });
     });
 };
 

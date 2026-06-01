@@ -1,4 +1,4 @@
-import {body, validationResult } from 'express-validator'
+import {body } from 'express-validator'
 
 const validateRegister = [
     body("full_name")
@@ -27,15 +27,5 @@ const validateLogin = [
         .isLength({min: 8}).withMessage("Password should be at least 8 letters")
 ];
 
-const handleValidation = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({
-            success: false,
-            errors: errors.array().map(error => error.msg)
-        });
-    }
-    next();
-};
 
-export { validateRegister, validateLogin, handleValidation};
+export { validateRegister, validateLogin};

@@ -15,8 +15,7 @@ async function register(req,res){
         return res.status(201).json({ success: true, message: "registered sucessfully!"});
 
     }catch(err){
-        console.error(err);
-        return res.status(500).json({ success: false, message: "Internal server error!"});
+        next(err);
     }
 };
 
@@ -45,8 +44,7 @@ async function login(req,res){
         }
     }
     catch(err){
-        console.error(err);
-        return res.status(500).json({ success: false, message: "Internal server error!"});
+        next(err)
     }
 };
 
